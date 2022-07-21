@@ -12,11 +12,19 @@ repositories {
 	mavenCentral()
 }
 
+dependencyManagement {
+	imports{
+		mavenBom 'org.keycloak.bom:keycloak-adapter-bom:18.0.2'
+	}
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter', version: '18.0.2'
+	implementation group: 'org.keycloak', name: 'keycloak-test-helper', version: '18.0.2'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
