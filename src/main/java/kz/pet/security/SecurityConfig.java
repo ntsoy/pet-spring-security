@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
+import static kz.pet.security.ApplicationUserPermission.STUDENT_READ;
 import static kz.pet.security.ApplicationUserRole.*;
 
 @Configuration
@@ -47,13 +48,11 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/index", "/css/*", "/js/*").permitAll()
+                .antMatchers("/api/students/*").hasRole(ADMIN.name())
                 .antMatchers("/api/**").fullyAuthenticated()
                 .anyRequest()
                 .authenticated();
-//                .and()
-//                .formLogin()
-//                .permitAll()
-//                .defaultSuccessUrl("/courses", true);
+
     }
 
     @Override
